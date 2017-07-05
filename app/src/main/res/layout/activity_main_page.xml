@@ -8,9 +8,41 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="tum.hitchmeup.MainPage">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hello World!" />
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="50px">
+            <Button
+                android:layout_width="50px"
+                android:layout_height="80px" />
+        </Toolbar>
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnCount="4">
+            <ImageButton
+                android:layout_width="80px"
+                android:layout_height="80px"
+                android:layout_columnWeight="1"
+                android:src="@drawable/car_96"
+                />
+        </GridLayout>
+        <Button
+            android:layout_width="300px"
+            android:layout_height="120px"
+            android:text="NextPage"
+            android:layout_gravity="bottom"
+            android:id="@+id/MainPageNext"
+            android:onClick="onClick"/>
+    </LinearLayout>
 </RelativeLayout>
