@@ -17,15 +17,30 @@ public class MainPage extends AppCompatActivity {
     public void onClick(View v) {
         switch (v.getId()) {
             case  R.id.MainPageNext: {
-                Intent nexPageIntent = new Intent(v.getContext(), HitchMePage.class);
-                startActivity(nexPageIntent);
+                Intent HitchPageIntent = new Intent(v.getContext(), HitchMePage.class);
+                startActivity(HitchPageIntent);
                 break;
             }
+            case  R.id.NaviPageNext: {
+                Intent NaviPageIntent = new Intent(v.getContext(), NaviPage.class);
+                startActivity(NaviPageIntent);
+                break;
+            }
+            case  R.id.Profile: {
+                Intent ProfileIntent = new Intent(v.getContext(), Profile.class);
+                startActivity(ProfileIntent);
+                break;
+            }
+            case  R.id.Settings: {
+                Intent SettingsIntent = new Intent(v.getContext(), Settings.class);
+                startActivity(SettingsIntent);
+                break;
+            }
+
             default:
                 Log.d("DEBUG","no Button found with this id");
                 break;
             //.... etc
         }
     }
-
 }

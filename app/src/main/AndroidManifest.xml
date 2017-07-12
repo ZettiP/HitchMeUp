@@ -13,18 +13,33 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            <activity
-                android:label="@string/app_name"
-                android:name=".nexPageIntent" >
+            <activity android:name=".HitchPageIntent" android:label="Hitch"/>
+            <activity android:name=".NaviPageIntent" android:label="Navi"/>
+            <activity android:name=".ProfileIntent"  android:label="Profile">
+
             </activity>
+            <activity android:name=".SettingsIntent" android:label="Settings"/>
         </activity>
         <activity android:name=".HitchMePage">
-
-        </activity><!-- ATTENTION: This was auto-generated to add Google Play services to your project for
-     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
-        <meta-data
-            android:name="com.google.android.gms.version"
+            <activity android:name=".startHitchIntent" />
+        </activity>
+        <activity android:name=".NaviPage">
+        </activity>
+        <activity android:name=".Profile">
+        </activity>
+        <activity android:name=".Settings">
+        </activity>
+        <!-- MetaData-->
+        <meta-data android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyAeiHVqYULM7pPo5ZMKOlNrq6R5zg8_LgM"/>
     </application>
+
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
 </manifest>

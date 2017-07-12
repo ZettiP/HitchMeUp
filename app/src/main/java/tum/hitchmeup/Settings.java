@@ -1,41 +1,31 @@
 package tum.hitchmeup;
 
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.view.View;
-import android.widget.SeekBar;
-import android.widget.TextView;
 
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 
 /**
- * Created by Philipp on 7/5/2017.
+ * Created by Philipp on 7/12/2017.
  */
-public class HitchMePage extends AppCompatActivity {
-
+public class Settings extends AppCompatActivity {
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
     private GoogleApiClient client;
 
-    private int timeLimit;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_hitchmepage);
+        setContentView(R.layout.settings);
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
-
-
 
     @Override
     public void onStart() {
@@ -46,7 +36,7 @@ public class HitchMePage extends AppCompatActivity {
         client.connect();
         Action viewAction = Action.newAction(
                 Action.TYPE_VIEW, // TODO: choose an action type.
-                "HitchMePage Page", // TODO: Define a title for the content shown.
+                "Settings Page", // TODO: Define a title for the content shown.
                 // TODO: If you have web page content that matches this app activity's content,
                 // make sure this auto-generated web page URL is correct.
                 // Otherwise, set the URL to null.
@@ -55,29 +45,6 @@ public class HitchMePage extends AppCompatActivity {
                 Uri.parse("android-app://tum.hitchmeup/http/host/path")
         );
         AppIndex.AppIndexApi.start(client, viewAction);
-
-        final SeekBar seek = (SeekBar) findViewById(R.id.timepicker);
-        seek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-
-            @Override
-            public void onStopTrackingTouch (SeekBar seekBar){
-                // TODO Auto-generated method stub
-            }
-
-            @Override
-            public void onStartTrackingTouch (SeekBar seekBar){
-                // TODO Auto-generated method stub
-            }
-
-            @Override
-            public void onProgressChanged (SeekBar seekBar,int progress, boolean fromUser){
-                // TODO Auto-generated method stub
-
-                TextView t1 = (TextView) findViewById(R.id.timepickerlabel);
-                timeLimit = (int)(progress * 0.6);
-                t1.setText(timeLimit + " min");
-            }
-        });
     }
 
     @Override
@@ -88,7 +55,7 @@ public class HitchMePage extends AppCompatActivity {
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         Action viewAction = Action.newAction(
                 Action.TYPE_VIEW, // TODO: choose an action type.
-                "HitchMePage Page", // TODO: Define a title for the content shown.
+                "Settings Page", // TODO: Define a title for the content shown.
                 // TODO: If you have web page content that matches this app activity's content,
                 // make sure this auto-generated web page URL is correct.
                 // Otherwise, set the URL to null.
@@ -98,23 +65,5 @@ public class HitchMePage extends AppCompatActivity {
         );
         AppIndex.AppIndexApi.end(client, viewAction);
         client.disconnect();
-    }
-
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case  R.id.startHitch: {
-                Intent startHitchIntent = new Intent(v.getContext(), MainPage.class);
-                startActivity(startHitchIntent);
-                break;
-            }
-            case  R.id.selectLocation: {
-                //start activity thats looking for a location at google maps
-                break;
-            }
-            default:
-                Log.d("DEBUG","no Button found with this id");
-                break;
-            //.... etc
-        }
     }
 }
