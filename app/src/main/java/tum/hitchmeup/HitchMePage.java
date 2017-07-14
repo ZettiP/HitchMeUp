@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
@@ -104,6 +105,9 @@ public class HitchMePage extends AppCompatActivity {
         switch (v.getId()) {
             case  R.id.startHitch: {
                 Intent startHitchIntent = new Intent(v.getContext(), MainPage.class);
+                //post HitchRequest via SocketIO/REST/or something else
+                Toast t =   Toast.makeText(this,"Hitch Request startet", Toast.LENGTH_LONG);
+                t.show();
                 startActivity(startHitchIntent);
                 break;
             }

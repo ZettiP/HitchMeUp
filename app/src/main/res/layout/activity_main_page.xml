@@ -14,9 +14,26 @@
         android:orientation="vertical">
         <TextView
             android:layout_alignParentTop="true"
+            android:textSize="16dp"
+            android:id="@+id/f"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Current News" />
+            android:text="No Request postet" />
+        <TextView
+            android:layout_alignParentTop="true"
+            android:textSize="16dp"
+            android:id="@+id/f2"
+            android:layout_below="@+id/f"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hitch request startet" />
+        <TextView
+            android:layout_alignParentTop="true"
+            android:layout_below="@+id/f2"
+            android:textSize="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Match found, you will be picked up!" />
         <ListView
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
