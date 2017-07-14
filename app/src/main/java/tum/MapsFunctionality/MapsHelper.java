@@ -29,7 +29,7 @@ public class MapsHelper {
         urlString.append("&key=YOUR_API_KEY");
         return urlString.toString();
     }
-    
+
     public String message;
     public String response;
 
