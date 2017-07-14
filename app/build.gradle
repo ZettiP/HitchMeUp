@@ -20,16 +20,15 @@ android {
             debuggable true
         }
     }
+    packagingOptions {
+        pickFirst 'META-INF/LICENSE.txt'
+    }
 }
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
 
-    compile group: 'org.apache.httpcomponents', name: 'httpclient-android', version: '4.3.5'
-    compile(group: 'org.apache.httpcomponents', name: 'httpmime', version: '4.3.5') {
-        exclude module: 'org.apache.httpcomponents:httpclient'
-    }
     compile 'com.android.support:appcompat-v7:24.0.0'
     compile 'com.google.android.gms:play-services:10.0.1'
     compile 'com.android.volley:volley:1.0.0'
@@ -37,6 +36,8 @@ dependencies {
     compile 'com.google.android.gms:play-services-auth:10.0.1'
     compile 'com.google.android.gms:play-services-gcm:10.0.1'
 }
+
 android {
     useLibrary 'org.apache.http.legacy'
 }
+
