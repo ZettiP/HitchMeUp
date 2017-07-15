@@ -21,6 +21,8 @@ public class LoginPage extends AppCompatActivity {
     public void onClick(View view) {
         //LoginButton
         //maybe check if it really is
+        //TODO: Do LoginMagic here
+
         Intent HitchPageIntent = new Intent(view.getContext(), MainPage.class);
         startActivity(HitchPageIntent);
     }
