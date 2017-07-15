@@ -1,4 +1,4 @@
-package tum.MapsFunctionality;
+package tum.Model;
 
 import android.util.Log;
 

@@ -9,10 +9,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainPage">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
             <activity android:name=".HitchPageIntent" android:label="Hitch"/>
             <activity android:name=".NaviPageIntent" android:label="Navi"/>
             <activity android:name=".ProfileIntent"  android:label="Profile"/>
@@ -26,6 +22,12 @@
         <activity android:name=".Profile">
         </activity>
         <activity android:name=".Settings">
+        </activity>
+        <activity android:name=".LoginPage">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <!-- MetaData-->
         <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />

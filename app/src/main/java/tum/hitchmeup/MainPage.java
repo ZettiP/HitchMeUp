@@ -8,9 +8,13 @@ import android.view.View;
 
 public class MainPage extends AppCompatActivity {
 
+    //HMUApplication application;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //application = (HMUApplication)getApplication();
+        //application.appname = "Hui";
         setContentView(R.layout.activity_main_page);
     }
 

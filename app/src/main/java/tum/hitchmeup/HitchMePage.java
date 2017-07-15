@@ -24,7 +24,6 @@ public class HitchMePage extends AppCompatActivity {
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
     private GoogleApiClient client;
-
     private int timeLimit;
 
     @Override
@@ -106,7 +105,7 @@ public class HitchMePage extends AppCompatActivity {
             case  R.id.startHitch: {
                 Intent startHitchIntent = new Intent(v.getContext(), MainPage.class);
                 //post HitchRequest via SocketIO/REST/or something else
-                Toast t =   Toast.makeText(this,"Hitch Request startet", Toast.LENGTH_LONG);
+                Toast t =   Toast.makeText(this,"Something", Toast.LENGTH_LONG);
                 t.show();
                 startActivity(startHitchIntent);
                 break;
