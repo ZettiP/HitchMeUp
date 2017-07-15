@@ -17,6 +17,7 @@
                 android:textSize="@dimen/pageleftlabel"
                 android:layout_columnWeight="1"/>
             <EditText
+                android:id="@+id/userNameEdit"
                 android:layout_columnWeight="3"
                 android:text="username"/>
         </GridLayout>
@@ -31,6 +32,7 @@
                 android:layout_columnWeight="1"/>
             <EditText
                 android:text="password"
+                android:id="@+id/pwEdit"
                 android:layout_columnWeight="3"
                 android:layout_width="101dp" />
         </GridLayout>
