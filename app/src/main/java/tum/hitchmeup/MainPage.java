@@ -5,17 +5,25 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.ListView;
+
+import java.util.List;
+
+import tum.customLayouts.NewsListAdapter;
 
 public class MainPage extends AppCompatActivity {
 
-    //HMUApplication application;
+    List<String> listViewItems;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //application = (HMUApplication)getApplication();
-        //application.appname = "Hui";
         setContentView(R.layout.activity_main_page);
+        ListView news = (ListView)findViewById(R.id.NewsListView);
+
+        String[] list = new String[]{"Hallo","Ich","bims"};
+        news.setAdapter(new NewsListAdapter(getApplicationContext(), R.layout.news_layout, list));
     }
 
     public void onClick(View v) {

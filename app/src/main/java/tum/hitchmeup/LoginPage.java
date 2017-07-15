@@ -14,8 +14,6 @@ public class LoginPage extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //application = (HMUApplication)getApplication();
-        //application.appname = "Hui";
         setContentView(R.layout.login_page);
     }
 
