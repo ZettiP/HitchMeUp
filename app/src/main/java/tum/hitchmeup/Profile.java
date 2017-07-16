@@ -1,12 +1,10 @@
 package tum.hitchmeup;
 
 import android.app.Fragment;
-import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
@@ -14,10 +12,6 @@ import android.view.View;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.PendingResult;
-import com.google.android.gms.common.api.ResultCallback;
-import com.google.android.gms.location.places.PlaceLikelihood;
-import com.google.android.gms.location.places.PlaceLikelihoodBuffer;
 import com.google.android.gms.location.places.Places;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -39,6 +33,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import tum.Model.DirectionsJSONParser;
 
 import static tum.hitchmeup.R.id.map;
 
@@ -66,6 +62,7 @@ public class Profile extends FragmentActivity implements OnMapReadyCallback {
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(map);
         mapFragment.getMapAsync(this);
+
     }
 
     @Override
@@ -118,7 +115,7 @@ public class Profile extends FragmentActivity implements OnMapReadyCallback {
 
     public void onClick(View v) {
         Log.d("DEV", "Action started");
-        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        /*if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions
             // here to request the missing permissions, and then overriding
@@ -140,13 +137,22 @@ public class Profile extends FragmentActivity implements OnMapReadyCallback {
                 }
                 likelyPlaces.release();
             }
-        });
+        });*/
+
+        LatLng origin = new LatLng(48.187762, 11.563206);
+        LatLng dest = new LatLng(48.528730, 12.113700);
+
+        String url = getDirectionsUrl(origin, dest);
+        DownloadTask downloadTask = new DownloadTask();
+        downloadTask.execute(url);
+        //Processing of result will be done by onPostListener();
 
     }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        mMap.getUiSettings().setZoomControlsEnabled(true);
         // Add a marker in Sydney, Australia, and move the camera.
         //LatLng sydney = new LatLng(48 , 12);
         //mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
@@ -160,11 +166,12 @@ public class Profile extends FragmentActivity implements OnMapReadyCallback {
                         new LatLng(-34.364, 147.891),
                         new LatLng(-33.501, 150.217),
                         new LatLng(-32.306, 149.248),
-                        new LatLng(-32.491, 147.309)));
+                        new LatLng(-32.491, 147.309))
+                .color(R.color.colorPrimary));
 
         // Position the map's camera near Alice Springs in the center of Australia,
         // and set the zoom factor so most of Australia shows on the screen.
-        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(-23.684, 133.903), 4));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(-23.684, 133.903), 4));
 
         // Set listeners for click events.
         //googleMap.setOnPolylineClickListener(this);
@@ -173,26 +180,9 @@ public class Profile extends FragmentActivity implements OnMapReadyCallback {
 
     /////////////////////////////////////////////////////////////////COPY CODE /////////////////////////
 
-/*
-    @Override
-    public void onLocationChanged(Location location) {
 
-        startPerc.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.ic_launcher));
 
-// Assign your origin and destination
-// These points are your markers coordinates
-        LatLng origin = new LatLng(3.214732, 101.747047);
-        LatLng dest = new LatLng(3.214507, 101.749697);
 
-// Getting URL to the Google Directions API
-        String url = getDirectionsUrl(origin, dest);
-
-        DownloadTask downloadTask = new DownloadTask();
-
-// Start downloading json data from Google Directions API
-        downloadTask.execute(url);
-    }
-*/
 
 
     private String getDirectionsUrl(LatLng origin,LatLng dest){
@@ -226,6 +216,7 @@ public class Profile extends FragmentActivity implements OnMapReadyCallback {
         String data = "";
         InputStream iStream = null;
         HttpURLConnection urlConnection = null;
+        Log.d("DEBUG","request Rout for connection string " + strUrl);
         try{
             URL url = new URL(strUrl);
 
@@ -289,6 +280,8 @@ public class Profile extends FragmentActivity implements OnMapReadyCallback {
 
             // Invokes the thread for parsing the JSON data
             parserTask.execute(result);
+
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(48.187762, 11.563206),8));
         }
     }
 
@@ -304,10 +297,10 @@ public class Profile extends FragmentActivity implements OnMapReadyCallback {
 
             try{
                 jObject = new JSONObject(jsonData[0]);
-                /*DirectionsJSONParser parser = new DirectionsJSONParser();
+                DirectionsJSONParser parser = new DirectionsJSONParser();
 
                 // Starts parsing data
-                routes = parser.parse(jObject);*/
+                routes = parser.parse(jObject);
             }catch(Exception e){
                 e.printStackTrace();
             }
@@ -320,6 +313,7 @@ public class Profile extends FragmentActivity implements OnMapReadyCallback {
             ArrayList<LatLng> points = null;
             PolylineOptions lineOptions = null;
             MarkerOptions markerOptions = new MarkerOptions();
+            markerOptions.title("Start");
 
             // Traversing through all the routes
             for(int i=0;i<result.size();i++){
@@ -342,12 +336,14 @@ public class Profile extends FragmentActivity implements OnMapReadyCallback {
 
                 // Adding all the points in the route to LineOptions
                 lineOptions.addAll(points);
-                lineOptions.width(2);
+                lineOptions.width(9);
                 lineOptions.color(Color.RED);
             }
 
             // Drawing polyline in the Google Map for the i-th route
-            //map.addPolyline(lineOptions);
+            mMap.addPolyline(lineOptions);
+
+            mMap.addMarker(markerOptions);
         }
     }
 }

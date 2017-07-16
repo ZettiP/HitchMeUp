@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import tum.hitchmeup.R;
@@ -18,10 +19,13 @@ import tum.hitchmeup.R;
 public class NewsListAdapter extends ArrayAdapter<String>{
 
     private Context context = null;
-    private String[] values = null;
+    private String[] values = null;// can be changed to arbitrary Objects so everthing can be stored
 
     public NewsListAdapter(@NonNull Context context, @LayoutRes int resource, @NonNull String[] objects) {
         super(context, resource, objects);
+
+        values = objects;
+
     }
 
     @Override
@@ -31,8 +35,10 @@ public class NewsListAdapter extends ArrayAdapter<String>{
         View rowView = inflater.inflate(R.layout.news_layout, parent, false);
         TextView textView = (TextView) rowView.findViewById(R.id.firstLine);
         TextView textView2 = (TextView) rowView.findViewById(R.id.secondLine);
-        textView.setText("first");
-        textView2.setText("second");
+        ImageView imageView = (ImageView) rowView.findViewById(R.id.newsIcon);
+        imageView.setImageResource(R.drawable.lightbulb_96);
+        textView.setText("New Match found");
+        textView2.setText(this.values[position]);
         // change the icon for Windows and iPhone
 
         return rowView;

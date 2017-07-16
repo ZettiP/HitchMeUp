@@ -4,7 +4,7 @@
     android:layout_height="80dp"
     android:id="@+id/NewsLayout">
         <ImageView
-            android:id="@+id/icon"
+            android:id="@+id/newsIcon"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:layout_alignParentBottom="true"
@@ -20,7 +20,7 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
             android:layout_alignWithParentIfMissing="true"
-            android:layout_toRightOf="@id/icon"
+            android:layout_toRightOf="@id/newsIcon"
             android:gravity="center_vertical"
             android:text="Your request has been accepted"
             android:textSize="16sp"/>
@@ -32,7 +32,7 @@
             android:layout_height="20dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
-            android:layout_toRightOf="@id/icon"
+            android:layout_toRightOf="@id/newsIcon"
             android:maxLines="3"
             android:text="Description"
             android:textSize="12sp" />
