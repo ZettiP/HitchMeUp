@@ -39,7 +39,7 @@
                 android:scaleType="fitCenter"
                 android:padding="5dp"
                 android:background="@color/White"
-                android:src="@drawable/car_96"
+                android:src="@drawable/person_walk"
                 android:id="@+id/MainPageNext"
                 android:onClick="onClick"/>
             <ImageButton
@@ -49,7 +49,7 @@
                 android:padding="10dp"
                 android:background="@color/White"
                 android:scaleType="fitCenter"
-                android:src="@drawable/traffic_96"
+                android:src="@drawable/car_96"
                 android:id="@+id/NaviPageNext"
                 android:onClick="onClick"/>
             <ImageButton

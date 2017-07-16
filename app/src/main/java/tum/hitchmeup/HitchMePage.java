@@ -41,21 +41,6 @@ public class HitchMePage extends AppCompatActivity {
     public void onStart() {
         super.onStart();
 
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client.connect();
-        Action viewAction = Action.newAction(
-                Action.TYPE_VIEW, // TODO: choose an action type.
-                "HitchMePage Page", // TODO: Define a title for the content shown.
-                // TODO: If you have web page content that matches this app activity's content,
-                // make sure this auto-generated web page URL is correct.
-                // Otherwise, set the URL to null.
-                Uri.parse("http://host/path"),
-                // TODO: Make sure this auto-generated app URL is correct.
-                Uri.parse("android-app://tum.hitchmeup/http/host/path")
-        );
-        AppIndex.AppIndexApi.start(client, viewAction);
-
         final SeekBar seek = (SeekBar) findViewById(R.id.timepicker);
         seek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 
@@ -104,14 +89,13 @@ public class HitchMePage extends AppCompatActivity {
         switch (v.getId()) {
             case  R.id.startHitch: {
                 Intent startHitchIntent = new Intent(v.getContext(), MainPage.class);
-                //post HitchRequest via SocketIO/REST/or something else
-                Toast t =   Toast.makeText(this,"Something", Toast.LENGTH_LONG);
+                //TODO: post HitchRequest via SocketIO/REST/or something else
+                Toast t =   Toast.makeText(this,"HitchRequest has been sent", Toast.LENGTH_LONG);
                 t.show();
+                TextView start = (TextView) v.findViewById(R.id.StartEdit);
+                TextView ziel = (TextView) v.findViewById(R.id.ZielEdit);
+
                 startActivity(startHitchIntent);
-                break;
-            }
-            case  R.id.selectLocation: {
-                //start activity thats looking for a location at google maps
                 break;
             }
             default:
@@ -120,4 +104,6 @@ public class HitchMePage extends AppCompatActivity {
             //.... etc
         }
     }
+
+
 }

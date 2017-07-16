@@ -1,6 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp">
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:text="Start"
+                    android:id="@+id/StartLabel"
+                    android:textSize="@dimen/pageleftlabel"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"/>
+                <EditText
+                    android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@+id/StartLabel"
+                    android:id="@+id/StartEdit"
+                    android:hint="@string/start_default"
+                    android:layout_weight="5"
+                    android:layout_gravity="fill_horizontal"
+                    android:lines="1"/>
+            </TableRow>
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Ziel"
+                    android:textSize="@dimen/pageleftlabel"/>
+                <EditText
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:layout_weight="5"
+                    android:id="@+id/ZielEdit"
+                    android:hint="@string/ziel_default"
+                    android:layout_gravity="fill_horizontal"
+                    android:lines="1"/>
+            </TableRow>
+        </TableLayout>
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <Button
+                android:layout_width="500px"
+                android:layout_height="120px"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:text="Start navigation"
+                android:onClick="onClick"
+                android:id="@+id/startNavigation"
+                android:layout_gravity="right"/>
+            <Button
+                android:layout_width="500px"
+                android:layout_height="120px"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:text="Look for HitchHacker"
+                android:onClick="onClick"
+                android:id="@+id/LookForHitcher"
+                android:layout_gravity="right"/>
+            <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/startNavigation"
+                android:id="@+id/map"
+                tools:context=".MapsActivity"
+                android:name="com.google.android.gms.maps.SupportMapFragment" />
+        </RelativeLayout>
+    </LinearLayout>
 </RelativeLayout>
