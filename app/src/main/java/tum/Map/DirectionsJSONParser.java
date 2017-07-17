@@ -1,4 +1,4 @@
-package tum.Model;
+package tum.Map;
 
 import com.google.android.gms.maps.model.LatLng;
 

@@ -1,4 +1,4 @@
-package tum.Model;
+package tum.Map;
 
 import android.graphics.Color;
 import android.os.AsyncTask;

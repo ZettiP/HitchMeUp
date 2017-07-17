@@ -13,12 +13,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import tum.Models.BaseApplication;
 import tum.customLayouts.NewsListAdapter;
 
 public class MainPage extends AppCompatActivity {
 
     List<String> listViewItems;
     NewsListAdapter listAdapter;
+    BaseApplication app;
 
     SharedPreferences pref;
     SharedPreferences.Editor editor;
@@ -38,6 +40,7 @@ public class MainPage extends AppCompatActivity {
 
         pref = PreferenceManager.getDefaultSharedPreferences(this);
         editor = pref.edit();
+        app = (BaseApplication) getApplication();
     }
 
     public void onClick(View v) {

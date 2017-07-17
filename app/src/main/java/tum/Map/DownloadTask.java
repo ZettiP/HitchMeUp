@@ -1,4 +1,4 @@
-package tum.Model;
+package tum.Map;
 
 import android.os.AsyncTask;
 import android.util.Log;
