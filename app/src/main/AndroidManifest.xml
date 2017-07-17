@@ -25,6 +25,9 @@
             <activity android:name=".startHitchIntent" />
         </activity>
         <activity android:name=".NaviPage">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainPage" />
         </activity>
         <activity android:name=".Profile">
             <meta-data

@@ -38,7 +38,6 @@ public class MainPage extends AppCompatActivity {
 
         pref = PreferenceManager.getDefaultSharedPreferences(this);
         editor = pref.edit();
-
     }
 
     public void onClick(View v) {
