@@ -4,6 +4,8 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/HitchMeUp.iml" filepath="$PROJECT_DIR$/HitchMeUp.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hmu-frontend.iml" filepath="$PROJECT_DIR$/hmu-frontend.iml" />
     </modules>
   </component>
 </project>
