@@ -1,29 +1,46 @@
 package tum.hitchmeup;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
+import tum.Models.BaseApplication;
 import tum.customLayouts.NewsListAdapter;
 
 public class MainPage extends AppCompatActivity {
 
     List<String> listViewItems;
+    NewsListAdapter listAdapter;
+    BaseApplication app;
 
+    SharedPreferences pref;
+    SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_page);
-        ListView news = (ListView)findViewById(R.id.NewsListView);
 
-        String[] list = new String[]{"Hallo","Ich","bims"};
-        news.setAdapter(new NewsListAdapter(getApplicationContext(), R.layout.news_layout, list));
+        //initialize NewsList
+        ListView news = (ListView)findViewById(R.id.NewsListView);
+        List<String> list = new ArrayList<String>();
+        String newsListString = "";
+        list = new ArrayList<String>(Arrays.asList(newsListString.split("#")));
+        listAdapter = new NewsListAdapter(getApplicationContext(), R.layout.news_layout, list);
+        news.setAdapter(listAdapter);
+
+        pref = PreferenceManager.getDefaultSharedPreferences(this);
+        editor = pref.edit();
+        app = (BaseApplication) getApplication();
     }
 
     public void onClick(View v) {
@@ -55,4 +72,26 @@ public class MainPage extends AppCompatActivity {
             //.... etc
         }
     }
+
+    private void addListElement(String element)
+    {
+        listAdapter.add(element);
+        listAdapter.notifyDataSetChanged();
+    }
+
+    private void addToNewsList(String content){
+        String newsListString = pref.getString(String.valueOf(R.string.NewsList), "");
+        if (newsListString != "")
+            newsListString = newsListString + "#" + content;
+        else
+            newsListString = content;
+
+        editor.putString(String.valueOf(R.string.NewsList), newsListString);
+        editor.apply();
+        addListElement(content);
+        Log.d("NL", "Element '" + content + "' has been added to news List");
+
+
+    }
+
 }

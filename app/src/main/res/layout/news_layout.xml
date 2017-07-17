@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="80dp"
-    android:id="@+id/NewsLayout">
+    android:id="@+id/NewsLayout"
+    android:layout_margin="5dp">
         <ImageView
             android:id="@+id/newsIcon"
             android:layout_width="wrap_content"
@@ -10,20 +11,20 @@
             android:layout_alignParentBottom="true"
             android:layout_alignParentTop="true"
             android:layout_marginRight="6dip"
-            android:src="@drawable/lightbulb_96" />
+            android:src="@drawable/lightbulb_96"/>
         <!--Headline -->
         <TextView
             android:id="@+id/firstLine"
             android:layout_width="match_parent"
             android:layout_height="20dp"
-
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
             android:layout_alignWithParentIfMissing="true"
             android:layout_toRightOf="@id/newsIcon"
             android:gravity="center_vertical"
             android:text="Your request has been accepted"
-            android:textSize="16sp"/>
+            android:textSize="16sp"
+            android:textColor="@color/Black"/>
     <!--Content line -->
         <TextView
             android:id="@+id/secondLine"
@@ -35,5 +36,6 @@
             android:layout_toRightOf="@id/newsIcon"
             android:maxLines="3"
             android:text="Description"
-            android:textSize="12sp" />
+            android:textSize="12sp"
+            android:textColor="@color/Black"/>
 </RelativeLayout>
