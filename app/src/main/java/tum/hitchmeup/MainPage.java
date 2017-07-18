@@ -38,6 +38,9 @@ public class MainPage extends BaseBaseActivity {
         pref = PreferenceManager.getDefaultSharedPreferences(this);
         editor = pref.edit();
         app = (BaseApplication) getApplication();
+
+        /*MenuItem item = (MenuItem)findViewById(R.id.nav_home);
+        item.setChecked(true);*/
     }
 
     public void onClick(View v) {

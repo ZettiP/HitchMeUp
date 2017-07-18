@@ -23,6 +23,8 @@ public class Profile extends BaseBaseActivity{
 
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
 
+        /*MenuItem item = (MenuItem)findViewById(R.id.nav_profile);
+        item.setChecked(true);*/
     }
 
     @Override

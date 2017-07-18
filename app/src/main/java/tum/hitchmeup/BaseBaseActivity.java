@@ -4,8 +4,6 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.ListFragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -54,9 +52,7 @@ public class BaseBaseActivity extends AppCompatActivity {
 
     public void selectDrawerItem(MenuItem menuItem) {
 
-        Fragment fragment = null;
-        ListFragment listfragment = null;
-
+        menuItem.setChecked(true);
         switch(menuItem.getItemId()) {
             case R.id.nav_home: // home
                 Intent MainPage = new Intent(getApplicationContext(), MainPage.class);
@@ -78,24 +74,15 @@ public class BaseBaseActivity extends AppCompatActivity {
                 Intent ProfileIntent = new Intent(getApplicationContext(), Profile.class);
                 startActivity(ProfileIntent);
                 break;
+            case R.id.nav_logout:
+                //do logout
+                Intent LogoutIntent = new Intent(getApplicationContext(), LoginActivity.class);
+                startActivity(LogoutIntent);
+                break;
             default:
                 Intent MainPage2 = new Intent(getApplicationContext(), MainPage.class);
                 startActivity(MainPage2);
         }
-
-        /*if (fragment != null) {
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction()
-                    .replace(R.id.flContent, fragment).commit();
-        } else if (listfragment != null) {
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction()
-                    .replace(R.id.flContent, listfragment).commit();
-        } else {
-            Log.e("BaseActivity", "Error in creating fragment");
-        }*/
-
-        menuItem.setChecked(true);
         setTitle(menuItem.getTitle());
         dlDrawer.closeDrawers();
     }
