@@ -7,6 +7,7 @@ import android.util.Log;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -19,6 +20,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.List;
 import java.util.Locale;
+
+import tum.hitchmeup.R;
 
 /**
  * Created by Philipp on 7/12/2017.
@@ -45,8 +48,8 @@ public class MapsHelper {
         builder.include(o);
         builder.include(d);
         mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(builder.build(), 48));
-        mMap.addMarker(new MarkerOptions().position(o).title("Start"));
-        mMap.addMarker(new MarkerOptions().position(d).title("Ziel"));
+        mMap.addMarker(new MarkerOptions().position(o).title("Start").icon(BitmapDescriptorFactory.fromResource(R.drawable.routestart)));
+        mMap.addMarker(new MarkerOptions().position(d).title("Ziel").icon(BitmapDescriptorFactory.fromResource(R.drawable.routeend)));
         return getDirectionsUrl(o,d);
     }
 
