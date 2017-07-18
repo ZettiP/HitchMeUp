@@ -37,18 +37,26 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainPage" />
         </activity>
-        <activity android:name=".LoginPage">
+        <activity
+            android:name=".SplashActivity"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".RegisterActivity" />
+        <activity android:name=".BaseActivity" />
+        <activity android:name=".SearchActivity"/>
         <!-- MetaData-->
         <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyAeiHVqYULM7pPo5ZMKOlNrq6R5zg8_LgM"/>
     </application>
+
+    <!--Permissions-->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.INTERNET"/>
