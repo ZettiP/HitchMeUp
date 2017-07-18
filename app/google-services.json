@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "159604989247",
+    "firebase_url": "https://hitchmeup-173823.firebaseio.com",
+    "project_id": "hitchmeup-173823",
+    "storage_bucket": "hitchmeup-173823.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:159604989247:android:96db9ac804f10c9a",
+        "android_client_info": {
+          "package_name": "tum.hitchmeup"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "159604989247-domu7moivub7qkeknu51hfeaip44820a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCM96BlzkkBZeW0z1zzxd9PppuUkNtRZPs"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
