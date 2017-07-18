@@ -32,7 +32,7 @@ public class NaviPage extends BaseBaseActivity implements OnMapReadyCallback{
         setContentView(R.layout.activity_navipage);
         super.onCreate(savedInstanceState);
         // Gets the MapView from the XML layout and creates it
-
+        nvDrawer.getMenu().getItem(3).setChecked(true);
     }
 
     @Override

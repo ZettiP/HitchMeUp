@@ -25,6 +25,7 @@ public class Profile extends BaseBaseActivity{
 
         /*MenuItem item = (MenuItem)findViewById(R.id.nav_profile);
         item.setChecked(true);*/
+        nvDrawer.getMenu().getItem(1).setChecked(true);
     }
 
     @Override

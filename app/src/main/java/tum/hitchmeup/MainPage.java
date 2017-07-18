@@ -39,8 +39,7 @@ public class MainPage extends BaseBaseActivity {
         editor = pref.edit();
         app = (BaseApplication) getApplication();
 
-        /*MenuItem item = (MenuItem)findViewById(R.id.nav_home);
-        item.setChecked(true);*/
+        nvDrawer.getMenu().getItem(0).setChecked(true);
     }
 
     public void onClick(View v) {
