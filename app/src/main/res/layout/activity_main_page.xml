@@ -34,6 +34,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/NoNewsText"
+                    android:text="Currently no News"
+                    android:textSize="24dp"
+                    android:gravity="center_horizontal"/>
                 <ImageView
                     android:layout_width="200dp"
                     android:layout_height="200dp"

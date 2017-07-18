@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -35,11 +36,15 @@ public class MainPage extends BaseBaseActivity {
         if(newsListString == "")
         {
             listAdapter = new NewsListAdapter(getApplicationContext(), R.layout.news_layout,  new ArrayList<String>());
+            TextView view = (TextView) findViewById(R.id.NoNewsText);
+            view.setTextKeepState("Currently no News");
         }
         else
         {
             list = new ArrayList<String>(Arrays.asList(newsListString.split("#")));
             listAdapter = new NewsListAdapter(getApplicationContext(), R.layout.news_layout, list);
+            TextView view = (TextView) findViewById(R.id.NoNewsText);
+            view.setTextKeepState("");
         }
 
         news.setAdapter(listAdapter);
