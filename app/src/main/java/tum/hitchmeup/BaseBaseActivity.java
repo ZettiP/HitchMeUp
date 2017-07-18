@@ -1,24 +1,19 @@
 package tum.hitchmeup;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.ListFragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 
-import tum.fragments.HomeFragment;
-import tum.fragments.MainPageFragment;
-import tum.fragments.SettingsFragment;
 
-
-public class BaseActivity extends AppCompatActivity {
+public class BaseBaseActivity extends AppCompatActivity {
 
     Toolbar toolbar;
     NavigationView nvDrawer;
@@ -28,10 +23,6 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_base);
-
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.flContent, new HomeFragment()).commit();
 
         // Set a ToolBar to replace the ActionBar.
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -68,19 +59,31 @@ public class BaseActivity extends AppCompatActivity {
 
         switch(menuItem.getItemId()) {
             case R.id.nav_home: // home
-                fragment = new MainPageFragment();
+                Intent MainPage = new Intent(getApplicationContext(), MainPage.class);
+                startActivity(MainPage);
                 break;
             case R.id.nav_settings: // settings
-                fragment = new SettingsFragment();
+                Intent SettingsIntent = new Intent(getApplicationContext(), Settings.class);
+                startActivity(SettingsIntent);
+                break;
+            case R.id.nav_hitch_request:
+                Intent HitchPageIntent = new Intent(getApplicationContext(), HitchMePage.class);
+                startActivity(HitchPageIntent);
                 break;
             case R.id.nav_navi_request:
-
+                Intent NaviPageIntent = new Intent(getApplicationContext(), NaviPage.class);
+                startActivity(NaviPageIntent);
+                break;
+            case R.id.nav_profile:
+                Intent ProfileIntent = new Intent(getApplicationContext(), Profile.class);
+                startActivity(ProfileIntent);
                 break;
             default:
-                fragment = new HomeFragment();
+                Intent MainPage2 = new Intent(getApplicationContext(), MainPage.class);
+                startActivity(MainPage2);
         }
 
-        if (fragment != null) {
+        /*if (fragment != null) {
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction()
                     .replace(R.id.flContent, fragment).commit();
@@ -90,7 +93,7 @@ public class BaseActivity extends AppCompatActivity {
                     .replace(R.id.flContent, listfragment).commit();
         } else {
             Log.e("BaseActivity", "Error in creating fragment");
-        }
+        }*/
 
         menuItem.setChecked(true);
         setTitle(menuItem.getTitle());

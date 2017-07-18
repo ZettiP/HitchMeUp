@@ -14,6 +14,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/imageView"
-        android:layout_gravity="right|center_vertical"
-        android:src="@drawable/noshadow" />
+        android:layout_gravity="center_horizontal|center_vertical"
+        android:src="@drawable/hitch_icon" />
 </FrameLayout>

@@ -1,7 +1,6 @@
 package tum.hitchmeup;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -9,7 +8,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 /**
  * Created by Philipp on 7/12/2017.
  */
-public class Profile extends AppCompatActivity{
+public class Profile extends BaseBaseActivity{
     private GoogleApiClient client;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -17,8 +16,8 @@ public class Profile extends AppCompatActivity{
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         setContentView(R.layout.profile);
+        super.onCreate(savedInstanceState);
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
 

@@ -1,10 +1,8 @@
 package tum.hitchmeup;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
@@ -16,7 +14,7 @@ import java.util.List;
 import tum.Models.BaseApplication;
 import tum.customLayouts.NewsListAdapter;
 
-public class MainPage extends AppCompatActivity {
+public class MainPage extends BaseBaseActivity {
 
     List<String> listViewItems;
     NewsListAdapter listAdapter;
@@ -27,9 +25,8 @@ public class MainPage extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_page);
-
+        super.onCreate(savedInstanceState);
         //initialize NewsList
         ListView news = (ListView)findViewById(R.id.NewsListView);
         List<String> list = new ArrayList<String>();
@@ -44,7 +41,7 @@ public class MainPage extends AppCompatActivity {
     }
 
     public void onClick(View v) {
-        switch (v.getId()) {
+        /*switch (v.getId()) {
             case  R.id.MainPageNext: {
                 Intent HitchPageIntent = new Intent(v.getContext(), HitchMePage.class);
                 startActivity(HitchPageIntent);
@@ -70,7 +67,7 @@ public class MainPage extends AppCompatActivity {
                 Log.d("DEBUG","no Button found with this id");
                 break;
             //.... etc
-        }
+        }*/
     }
 
     private void addListElement(String element)

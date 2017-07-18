@@ -1,52 +1,84 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:id="@+id/ProfileLayoutMain">
-        <ImageView
-            android:id="@+id/UserImage"
-            android:layout_width="150dp"
-            android:layout_height="200dp"
-            android:padding="5dp"
-            android:src="@drawable/person_96"/>
-        <LinearLayout
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <!-- The ActionBar -->
+        <android.support.design.widget.AppBarLayout
+            android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:theme="@style/AppTheme.AppBarOverlay"
+            xmlns:android="http://schemas.android.com/apk/res/android">
+            <android.support.v7.widget.Toolbar android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                app:popupTheme="@style/AppTheme.PopupOverlay" />
+        </android.support.design.widget.AppBarLayout>
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:orientation="vertical"
-            android:padding="5dp">
-            <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="2dp"
-                android:textSize="16dp"
-                android:text="Max Mustermann"
-                android:id="@+id/Name"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="2dp"
-                android:textSize="16dp"
-                android:text="20 Jahre"
-                android:id="@+id/Age"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="2dp"
+                android:orientation="horizontal"
+                android:id="@+id/ProfileLayoutMain">
+                <ImageView
+                    android:id="@+id/UserImage"
+                    android:layout_width="150dp"
+                    android:layout_height="200dp"
+                    android:padding="5dp"
+                    android:src="@drawable/person_96"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:padding="5dp">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="2dp"
+                        android:textSize="16dp"
+                        android:text="Max Mustermann"
+                        android:id="@+id/Name"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="2dp"
+                        android:textSize="16dp"
+                        android:text="20 Jahre"
+                        android:id="@+id/Age"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="2dp"
 
-                android:textSize="16dp"
-                android:text="200 Fahrten bisher"
-                android:id="@+id/Fahrten"/>
-        </LinearLayout>
+                        android:textSize="16dp"
+                        android:text="200 Fahrten bisher"
+                        android:id="@+id/Fahrten"/>
+                </LinearLayout>
+            </LinearLayout>
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ProfileLayoutMain"
+                android:id="@+id/ProfileRatings">
+            </ListView>
+        </RelativeLayout>
     </LinearLayout>
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/ProfileLayoutMain"
-        android:id="@+id/ProfileRatings">
-    </ListView>
-</RelativeLayout>
+    <!-- The navigation drawer -->
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nvView"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="@android:color/white"
+        app:headerLayout="@layout/nav_header"
+        app:menu="@menu/menu_drawer" />
+</android.support.v4.widget.DrawerLayout>

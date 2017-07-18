@@ -3,7 +3,6 @@ package tum.hitchmeup;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.SeekBar;
@@ -17,7 +16,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 /**
  * Created by Philipp on 7/5/2017.
  */
-public class HitchMePage extends AppCompatActivity {
+public class HitchMePage extends BaseBaseActivity {
 
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -28,14 +27,13 @@ public class HitchMePage extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hitchmepage);
+        super.onCreate(savedInstanceState);
+
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
-
-
 
     @Override
     public void onStart() {
