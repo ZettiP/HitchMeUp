@@ -2,7 +2,6 @@ package tum.hitchmeup;
 
 import android.os.Bundle;
 
-import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 
 /**
@@ -21,10 +20,11 @@ public class Profile extends BaseBaseActivity{
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
 
-        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+        //client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
 
         /*MenuItem item = (MenuItem)findViewById(R.id.nav_profile);
         item.setChecked(true);*/
+        nvDrawer.getMenu().getItem(1).setChecked(true);
     }
 
     @Override

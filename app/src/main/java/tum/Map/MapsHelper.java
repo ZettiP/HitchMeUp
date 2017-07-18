@@ -1,5 +1,8 @@
 package tum.Map;
 
+import android.content.Context;
+import android.location.Address;
+import android.location.Geocoder;
 import android.util.Log;
 
 import com.google.android.gms.maps.GoogleMap;
@@ -11,15 +14,46 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by Philipp on 7/12/2017.
  */
 public class MapsHelper {
     GoogleMap mMap;
+    private Context appContext;
 
-    public MapsHelper(GoogleMap map) {
+    LatLng zoomValue;
+
+    public MapsHelper(GoogleMap map, Context appContext) {
         this.mMap = map;
+        this.appContext = appContext;
+    }
+
+    public String getDirectionsUrl(String origin, String dest){
+        LatLng o = getLatLong(origin);
+        LatLng d =getLatLong(dest);
+        zoomValue = new LatLng((o.latitude+d.latitude)/2,(o.longitude+d.longitude)/2);
+
+        return getDirectionsUrl(o,d);
+    }
+
+    public LatLng getLatLong(String place)
+    {
+        double latitude = 48;
+        double longitude = 10;
+
+        Geocoder geoCoder = new Geocoder(appContext, Locale.getDefault());
+        try {
+            List<Address> address = geoCoder.getFromLocationName(place, 2);
+            latitude = address.get(0).getLatitude();
+            longitude = address.get(0).getLongitude();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return new LatLng(latitude,longitude);
     }
 
     public String getDirectionsUrl(LatLng origin, LatLng dest) {

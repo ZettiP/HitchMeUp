@@ -3,8 +3,10 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/hitchmeup.iml" filepath="$PROJECT_DIR$/hitchmeup.iml" />
-      <module fileurl="file://$PROJECT_DIR$/hmu-frontend.iml" filepath="$PROJECT_DIR$/hmu-frontend.iml" />
+<<<<<<< HEAD
+=======
+      <module fileurl="file://$PROJECT_DIR$/hmu_frontend.iml" filepath="$PROJECT_DIR$/hmu_frontend.iml" />
+>>>>>>> 5d47d293115aa811c3e1ad978981b5c4e266d13b
     </modules>
   </component>
 </project>

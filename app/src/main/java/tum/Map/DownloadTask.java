@@ -4,7 +4,6 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.model.LatLng;
 
 // Fetches data from url passed
 public class DownloadTask extends AsyncTask<String, Void, String> {
@@ -37,11 +36,12 @@ public class DownloadTask extends AsyncTask<String, Void, String> {
     protected void onPostExecute(String result) {
         super.onPostExecute(result);
 
+        helper.mMap.clear();
         ParserTask parserTask = new ParserTask(helper);
 
         // Invokes the thread for parsing the JSON data
         parserTask.execute(result);
-
-        helper.mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(48.187762, 11.563206),8));
+        //TODO change zoom origin
+        helper.mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(helper.zoomValue,8));
     }
 }
