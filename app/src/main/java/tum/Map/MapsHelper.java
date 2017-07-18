@@ -5,8 +5,10 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.util.Log;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -24,7 +26,8 @@ public class MapsHelper {
     GoogleMap mMap;
     private Context appContext;
 
-    LatLng zoomValue;
+    LatLng ZoomOrigin;
+    double ZoomValue = 8;
 
     public MapsHelper(GoogleMap map, Context appContext) {
         this.mMap = map;
@@ -33,9 +36,13 @@ public class MapsHelper {
 
     public String getDirectionsUrl(String origin, String dest){
         LatLng o = getLatLong(origin);
-        LatLng d =getLatLong(dest);
-        zoomValue = new LatLng((o.latitude+d.latitude)/2,(o.longitude+d.longitude)/2);
+        LatLng d = getLatLong(dest);
+        ZoomOrigin = new LatLng((o.latitude+d.latitude)/2,(o.longitude+d.longitude)/2);
 
+        LatLngBounds.Builder builder = new LatLngBounds.Builder();
+        builder.include(o);
+        builder.include(d);
+        mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(builder.build(), 48));
         return getDirectionsUrl(o,d);
     }
 

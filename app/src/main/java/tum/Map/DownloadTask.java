@@ -3,8 +3,6 @@ package tum.Map;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.google.android.gms.maps.CameraUpdateFactory;
-
 // Fetches data from url passed
 public class DownloadTask extends AsyncTask<String, Void, String> {
 
@@ -42,6 +40,6 @@ public class DownloadTask extends AsyncTask<String, Void, String> {
         // Invokes the thread for parsing the JSON data
         parserTask.execute(result);
         //TODO change zoom origin
-        helper.mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(helper.zoomValue,8));
+        //helper.mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(helper.ZoomOrigin,8));
     }
 }

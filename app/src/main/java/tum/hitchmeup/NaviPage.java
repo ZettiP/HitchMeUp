@@ -1,10 +1,12 @@
 package tum.hitchmeup;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
 import com.google.android.gms.appindexing.AppIndex;
@@ -71,6 +73,7 @@ public class NaviPage extends BaseBaseActivity implements OnMapReadyCallback {
                 Log.d("MAP", "onclick worked");
                 if (mMap != null)
                     Log.d("MAP", "Map is there");
+                hideSoftKeyboard(this);
                 StartNavigation();
                 break;
             }
@@ -89,8 +92,8 @@ public class NaviPage extends BaseBaseActivity implements OnMapReadyCallback {
         Log.d("MAP", "OnMapReady");
         mMap = googleMap;
         mMap.getUiSettings().setMyLocationButtonEnabled(false);
+        mMap.getUiSettings().setZoomControlsEnabled(true);
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(48, 12), 8));
-
     }
 
     @Override
@@ -130,6 +133,14 @@ public class NaviPage extends BaseBaseActivity implements OnMapReadyCallback {
         DownloadTask downloadTask = new DownloadTask(helper);
         downloadTask.execute(url);
 
+    }
+
+    public static void hideSoftKeyboard(Activity activity) {
+        InputMethodManager inputMethodManager =
+                (InputMethodManager) activity.getSystemService(
+                        Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(
+                activity.getCurrentFocus().getWindowToken(), 0);
     }
 
 }
