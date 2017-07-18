@@ -42,6 +42,8 @@ public class MainPage extends BaseBaseActivity {
         nvDrawer.getMenu().getItem(0).setChecked(true);
     }
 
+
+
     public void onClick(View v) {
         /*switch (v.getId()) {
             case  R.id.MainPageNext: {
