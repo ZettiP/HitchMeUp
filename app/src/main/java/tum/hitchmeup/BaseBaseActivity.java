@@ -10,6 +10,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
+import tum.SharedPreferencesHandler;
+
 
 public class BaseBaseActivity extends AppCompatActivity {
 
@@ -76,6 +78,7 @@ public class BaseBaseActivity extends AppCompatActivity {
                 break;
             case R.id.nav_logout:
                 //do logout
+                SharedPreferencesHandler.writeBoolean(getApplicationContext(), "rememberMe", false);
                 Intent LogoutIntent = new Intent(getApplicationContext(), LoginActivity.class);
                 startActivity(LogoutIntent);
                 break;
