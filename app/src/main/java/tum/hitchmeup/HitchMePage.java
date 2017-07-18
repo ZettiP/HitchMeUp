@@ -43,11 +43,8 @@ public class HitchMePage extends BaseBaseActivity {
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
-<<<<<<< HEAD
         nvDrawer.getMenu().getItem(2).setChecked(true);
-=======
         context = this.getApplicationContext();
->>>>>>> 5d47d293115aa811c3e1ad978981b5c4e266d13b
     }
 
     @Override

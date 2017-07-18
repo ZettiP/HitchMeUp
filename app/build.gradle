@@ -8,14 +8,11 @@ android {
         applicationId "tum.hitchmeup"
         minSdkVersion 22
         targetSdkVersion 25
-<<<<<<< HEAD
+
         versionCode 3
         versionName "1.3"
-=======
-        versionCode 2
-        versionName "1.1"
         multiDexEnabled true
->>>>>>> 5d47d293115aa811c3e1ad978981b5c4e266d13b
+
     }
     buildTypes {
         release {
