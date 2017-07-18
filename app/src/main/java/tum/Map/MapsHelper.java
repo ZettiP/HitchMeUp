@@ -9,6 +9,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -35,6 +36,7 @@ public class MapsHelper {
     }
 
     public String getDirectionsUrl(String origin, String dest){
+        mMap.clear();
         LatLng o = getLatLong(origin);
         LatLng d = getLatLong(dest);
         ZoomOrigin = new LatLng((o.latitude+d.latitude)/2,(o.longitude+d.longitude)/2);
@@ -43,6 +45,8 @@ public class MapsHelper {
         builder.include(o);
         builder.include(d);
         mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(builder.build(), 48));
+        mMap.addMarker(new MarkerOptions().position(o).title("Start"));
+        mMap.addMarker(new MarkerOptions().position(d).title("Ziel"));
         return getDirectionsUrl(o,d);
     }
 

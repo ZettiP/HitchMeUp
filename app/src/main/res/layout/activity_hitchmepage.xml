@@ -71,7 +71,7 @@
                         android:layout_gravity="fill_horizontal"
                         android:lines="1"/>
                 </TableRow>
-                <TableRow
+<!--                <TableRow
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <TextView
@@ -97,7 +97,7 @@
                             android:textAlignment="center"
                             android:text="10min"/>
                     </LinearLayout>
-                </TableRow>
+                </TableRow>-->
                 </TableLayout>
                 <LinearLayout
                     android:layout_width="match_parent"

@@ -8,6 +8,8 @@ import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.SeekBar;
+import android.widget.TextView;
 
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -26,6 +28,7 @@ import tum.Map.MapsHelper;
 public class NaviPage extends BaseBaseActivity implements OnMapReadyCallback {
     private GoogleMap mMap;
     private GoogleApiClient client;
+    private int timeLimit;
 
     //android.support.v4.app.Fragment mMapFragment;
 
@@ -44,6 +47,29 @@ public class NaviPage extends BaseBaseActivity implements OnMapReadyCallback {
         mapView = (MapView) findViewById(R.id.MapViewId);
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(this);
+
+        final SeekBar seek = (SeekBar) findViewById(R.id.timepicker);
+        seek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+
+            @Override
+            public void onStopTrackingTouch (SeekBar seekBar){
+                // TODO Auto-generated method stub
+            }
+
+            @Override
+            public void onStartTrackingTouch (SeekBar seekBar){
+                // TODO Auto-generated method stub
+            }
+
+            @Override
+            public void onProgressChanged (SeekBar seekBar,int progress, boolean fromUser){
+                // TODO Auto-generated method stub
+
+                TextView t1 = (TextView) findViewById(R.id.timepickerlabel);
+                timeLimit = (int)(progress * 0.6);
+                t1.setText(timeLimit + " min");
+            }
+        });
     }
 
     @Override
@@ -75,6 +101,13 @@ public class NaviPage extends BaseBaseActivity implements OnMapReadyCallback {
                     Log.d("MAP", "Map is there");
                 hideSoftKeyboard(this);
                 StartNavigation();
+
+                EditText start = (EditText) findViewById(R.id.StartEdit);
+                EditText ziel = (EditText) findViewById(R.id.ZielEdit);
+                //timeLimit is a local variable
+
+
+                //Posting NaviRqeuest
                 break;
             }
             case R.id.LookForHitcher: {
@@ -127,12 +160,10 @@ public class NaviPage extends BaseBaseActivity implements OnMapReadyCallback {
         EditText start = (EditText)findViewById(R.id.StartEdit);
         EditText ziel = (EditText)findViewById(R.id.ZielEdit);
 
-
         MapsHelper helper = new MapsHelper(mMap,getApplicationContext());
         String url = helper.getDirectionsUrl(start.getText().toString(), ziel.getText().toString());
         DownloadTask downloadTask = new DownloadTask(helper);
         downloadTask.execute(url);
-
     }
 
     public static void hideSoftKeyboard(Activity activity) {

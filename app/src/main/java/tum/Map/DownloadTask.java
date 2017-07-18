@@ -34,7 +34,7 @@ public class DownloadTask extends AsyncTask<String, Void, String> {
     protected void onPostExecute(String result) {
         super.onPostExecute(result);
 
-        helper.mMap.clear();
+
         ParserTask parserTask = new ParserTask(helper);
 
         // Invokes the thread for parsing the JSON data

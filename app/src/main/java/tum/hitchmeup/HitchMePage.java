@@ -7,8 +7,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.SeekBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.appindexing.Action;
@@ -32,7 +30,7 @@ public class HitchMePage extends BaseBaseActivity {
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
     private GoogleApiClient client;
-    private int timeLimit;
+
     private Context context;
 
     @Override
@@ -51,28 +49,7 @@ public class HitchMePage extends BaseBaseActivity {
     public void onStart() {
         super.onStart();
 
-        final SeekBar seek = (SeekBar) findViewById(R.id.timepicker);
-        seek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 
-            @Override
-            public void onStopTrackingTouch (SeekBar seekBar){
-                // TODO Auto-generated method stub
-            }
-
-            @Override
-            public void onStartTrackingTouch (SeekBar seekBar){
-                // TODO Auto-generated method stub
-            }
-
-            @Override
-            public void onProgressChanged (SeekBar seekBar,int progress, boolean fromUser){
-                // TODO Auto-generated method stub
-
-                TextView t1 = (TextView) findViewById(R.id.timepickerlabel);
-                timeLimit = (int)(progress * 0.6);
-                t1.setText(timeLimit + " min");
-            }
-        });
     }
 
     @Override
