@@ -25,7 +25,7 @@
         android:text="HitchMeUp"
         android:id="@+id/textView"
         android:typeface="sans"
-        android:layout_marginBottom="187dp"
+        android:layout_marginBottom="214dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 </RelativeLayout>

@@ -18,6 +18,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import cz.msebera.android.httpclient.Header;
+import tum.Models.BaseApplication;
 import tum.mJsonHttpResponseHandler;
 
 /**
@@ -84,6 +85,9 @@ public class HitchMePage extends BaseBaseActivity {
                 params.put("from", start.getText().toString());
                 params.put("to", ziel.getText().toString());
 
+                //Add info to newsFeed
+                BaseApplication app = (BaseApplication)getApplication();
+                app.addToNewsList("Request to pick you up for a ride to " + ziel.getText().toString() + " has been posted");
 
                 AsyncClient.post("/api/hitchRequest", params, new mJsonHttpResponseHandler(this) {
                     @Override
@@ -93,6 +97,7 @@ public class HitchMePage extends BaseBaseActivity {
 
                                 Toast.makeText(context, response.getString(context.getString(R.string.server_message)), Toast.LENGTH_SHORT).show();
                                 //   Intent i = new Intent(context, BaseActivity.class);
+
                                 startActivity(startHitchIntent);
                                 finish();
                             } else if (response.getInt(context.getString(R.string.server_response)) == 0) {

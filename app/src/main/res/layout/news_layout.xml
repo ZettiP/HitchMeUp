@@ -3,15 +3,19 @@
     android:layout_width="match_parent"
     android:layout_height="80dp"
     android:id="@+id/NewsLayout"
-    android:layout_margin="5dp">
+    android:layout_margin="5dp"
+    android:layout_marginTop="10dp"
+    android:background="@drawable/custom_border">
         <ImageView
             android:id="@+id/newsIcon"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentTop="true"
             android:layout_marginRight="6dip"
-            android:src="@drawable/lightbulb_96"/>
+            android:scaleX="0.9"
+            android:scaleY="0.9"
+            android:src="@drawable/lightbulb_96"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true" />
         <!--Headline -->
         <TextView
             android:id="@+id/firstLine"
