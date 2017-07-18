@@ -72,7 +72,7 @@ public class LoginActivity extends AppCompatActivity {
                         System.out.println("Login successfull!");
 
                         Toast.makeText(context, response.getString(context.getString(R.string.server_message)), Toast.LENGTH_SHORT).show();
-                        Intent i = new Intent(context, BaseActivity.class);
+                        Intent i = new Intent(context, MainPage.class);
                         startActivity(i);
                         finish();
                     } else if (response.getInt(context.getString(R.string.server_response)) == 0) {

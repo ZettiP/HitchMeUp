@@ -48,7 +48,7 @@ public class SplashActivity extends AppCompatActivity {
                             try {
                                 if (response.getInt(context.getString(R.string.server_response)) == 1) {
                                     Toast.makeText(context, response.getString(context.getString(R.string.server_message)), Toast.LENGTH_SHORT).show();
-                                    Intent i = new Intent(context, BaseActivity.class);
+                                    Intent i = new Intent(context, MainPage.class);
                                     startActivity(i);
                                     finish();
                                 } else if (response.getInt(context.getString(R.string.server_response)) == 0) {
