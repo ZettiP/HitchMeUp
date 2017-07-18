@@ -2,10 +2,13 @@ package tum.hitchmeup;
 
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
 
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
+
+import tum.Models.BaseApplication;
 
 /**
  * Created by Philipp on 7/12/2017.
@@ -65,5 +68,11 @@ public class Settings extends BaseBaseActivity {
         );
         AppIndex.AppIndexApi.end(client, viewAction);
         client.disconnect();
+    }
+
+    public void onClick(View v)
+    {
+        BaseApplication app = (BaseApplication) getApplication();
+        app.clearNewsList();
     }
 }

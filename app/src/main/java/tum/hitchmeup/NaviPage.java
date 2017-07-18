@@ -21,6 +21,7 @@ import com.google.android.gms.maps.model.LatLng;
 
 import tum.Map.DownloadTask;
 import tum.Map.MapsHelper;
+import tum.Models.BaseApplication;
 
 /**
  * Created by Philipp on 7/5/2017.
@@ -164,6 +165,9 @@ public class NaviPage extends BaseBaseActivity implements OnMapReadyCallback {
         String url = helper.getDirectionsUrl(start.getText().toString(), ziel.getText().toString());
         DownloadTask downloadTask = new DownloadTask(helper);
         downloadTask.execute(url);
+
+        BaseApplication app = (BaseApplication)getApplication();
+        app.addToNewsList("Navigation to " + ziel.getText().toString() + " has been started");
     }
 
     public static void hideSoftKeyboard(Activity activity) {

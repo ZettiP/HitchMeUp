@@ -1,8 +1,6 @@
 package tum.hitchmeup;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
@@ -20,24 +18,33 @@ public class MainPage extends BaseBaseActivity {
     NewsListAdapter listAdapter;
     BaseApplication app;
 
-    SharedPreferences pref;
-    SharedPreferences.Editor editor;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_main_page);
         super.onCreate(savedInstanceState);
+        Log.d("MainPage", "onCreate");
+
         //initialize NewsList
         ListView news = (ListView)findViewById(R.id.NewsListView);
+        Log.d("MainPage News", news.toString());
+
+        app = (BaseApplication) getApplication();
+
         List<String> list = new ArrayList<String>();
-        String newsListString = "";
-        list = new ArrayList<String>(Arrays.asList(newsListString.split("#")));
-        listAdapter = new NewsListAdapter(getApplicationContext(), R.layout.news_layout, list);
+        String newsListString = app.getNewsString();
+        if(newsListString == "")
+        {
+            listAdapter = new NewsListAdapter(getApplicationContext(), R.layout.news_layout,  new ArrayList<String>());
+        }
+        else
+        {
+            list = new ArrayList<String>(Arrays.asList(newsListString.split("#")));
+            listAdapter = new NewsListAdapter(getApplicationContext(), R.layout.news_layout, list);
+        }
+
         news.setAdapter(listAdapter);
 
-        pref = PreferenceManager.getDefaultSharedPreferences(this);
-        editor = pref.edit();
-        app = (BaseApplication) getApplication();
+
 
         nvDrawer.getMenu().getItem(0).setChecked(true);
     }
@@ -74,25 +81,6 @@ public class MainPage extends BaseBaseActivity {
         }*/
     }
 
-    private void addListElement(String element)
-    {
-        listAdapter.add(element);
-        listAdapter.notifyDataSetChanged();
-    }
 
-    private void addToNewsList(String content){
-        String newsListString = pref.getString(String.valueOf(R.string.NewsList), "");
-        if (newsListString != "")
-            newsListString = newsListString + "#" + content;
-        else
-            newsListString = content;
-
-        editor.putString(String.valueOf(R.string.NewsList), newsListString);
-        editor.apply();
-        addListElement(content);
-        Log.d("NL", "Element '" + content + "' has been added to news List");
-
-
-    }
 
 }

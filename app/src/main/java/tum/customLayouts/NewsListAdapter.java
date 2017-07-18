@@ -40,7 +40,7 @@ public class NewsListAdapter extends ArrayAdapter<String>{
         TextView textView2 = (TextView) rowView.findViewById(R.id.secondLine);
         ImageView imageView = (ImageView) rowView.findViewById(R.id.newsIcon);
         imageView.setImageResource(R.drawable.lightbulb_96);
-        textView.setText("New Match found");
+        textView.setText("News");
         textView2.setText(values.get(position));
         // change the icon for Windows and iPhone
 
