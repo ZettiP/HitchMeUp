@@ -11,7 +11,6 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.firebase.iid.FirebaseInstanceId;
 import com.loopj.android.http.RequestParams;
 
 import org.json.JSONException;
@@ -56,7 +55,6 @@ public class LoginActivity extends AppCompatActivity {
         RequestParams params = new RequestParams();
         params.put("email", email.getText().toString());
         params.put("password", password.getText().toString());
-        params.put("token",  FirebaseInstanceId.getInstance().getToken());
 
         AsyncClient.post("auth/login", params, new mJsonHttpResponseHandler(this) {
             @Override
@@ -68,8 +66,6 @@ public class LoginActivity extends AppCompatActivity {
 
                             SharedPreferencesHandler.writeString(context, "email", email.getText().toString());
                             SharedPreferencesHandler.writeString(context, "password", password.getText().toString());
-                            SharedPreferencesHandler.writeString(context, "token", FirebaseInstanceId.getInstance().getToken());
-
                             SharedPreferencesHandler.writeBoolean(context, "rememberMe", true);
 
                         }

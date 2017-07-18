@@ -7,7 +7,6 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
-import com.google.firebase.iid.FirebaseInstanceId;
 import com.loopj.android.http.RequestParams;
 
 import org.json.JSONException;
@@ -42,7 +41,6 @@ public class SplashActivity extends AppCompatActivity {
                     RequestParams params = new RequestParams();
                     params.put("email", emailParam);
                     params.put("password", passParam);
-                    params.put("token", FirebaseInstanceId.getInstance().getToken());
 
                     AsyncClient.post("auth/login", params, new mJsonHttpResponseHandler(context) {
                         @Override
