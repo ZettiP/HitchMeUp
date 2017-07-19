@@ -1,7 +1,9 @@
 package tum.hitchmeup;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -10,6 +12,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -18,10 +21,15 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
+import com.loopj.android.http.RequestParams;
 
+import org.json.JSONArray;
+
+import cz.msebera.android.httpclient.Header;
 import tum.Map.DownloadTask;
 import tum.Map.MapsHelper;
 import tum.Models.BaseApplication;
+import tum.mJsonHttpResponseHandler;
 
 /**
  * Created by Philipp on 7/5/2017.
@@ -30,6 +38,9 @@ public class NaviPage extends BaseBaseActivity implements OnMapReadyCallback {
     private GoogleMap mMap;
     private GoogleApiClient client;
     private int timeLimit;
+    private JSONArray naviMatchings = new JSONArray();
+    private Context context;
+
 
     //android.support.v4.app.Fragment mMapFragment;
 
@@ -48,6 +59,7 @@ public class NaviPage extends BaseBaseActivity implements OnMapReadyCallback {
         mapView = (MapView) findViewById(R.id.MapViewId);
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(this);
+        context = this.getApplicationContext();
 
         final SeekBar seek = (SeekBar) findViewById(R.id.timepicker);
         seek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -105,12 +117,42 @@ public class NaviPage extends BaseBaseActivity implements OnMapReadyCallback {
 
                 EditText start = (EditText) findViewById(R.id.StartEdit);
                 EditText ziel = (EditText) findViewById(R.id.ZielEdit);
-                //timeLimit is a local variable
+
+                RequestParams updateParams = new RequestParams();
+                updateParams.put("from", start.getText().toString());
+                updateParams.put("to", ziel.getText().toString());
+                updateParams.put("maxDetour", "30");
+
+                //     Log.d(TAG, "from:" + fromET.getText().toString());
+                //     Log.d(TAG, "to:" + toET.getText().toString());
 
 
-                //Posting NaviRqeuest
-                break;
+                AsyncClient.post("api/naviRequest", updateParams, new mJsonHttpResponseHandler(context) {
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+
+                        //      Log.d(TAG, response.toString());
+
+                        if (response != null) {
+
+                            Toast.makeText(context, "Request created", Toast.LENGTH_SHORT).show();
+                       //     Toast.makeText(context, response.toString(), Toast.LENGTH_SHORT).show();
+                            naviMatchings = response;
+
+
+
+                        } else {
+                            Toast.makeText(context, "An Error has occured while trying to create the request", Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                });
+
             }
+
+            //Posting NaviRqeuest
+            break;
+
             case R.id.LookForHitcher: {
                 //TODO: ask server for places for Hitchhackers
             }

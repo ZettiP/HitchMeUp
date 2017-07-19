@@ -39,7 +39,7 @@ public class MapsHelper {
     }
 
     public String getDirectionsUrl(String origin, String dest){
-        mMap.clear();
+//        mMap.clear();
         LatLng o = getLatLong(origin);
         LatLng d = getLatLong(dest);
         ZoomOrigin = new LatLng((o.latitude+d.latitude)/2,(o.longitude+d.longitude)/2);

@@ -1,6 +1,8 @@
 package tum.hitchmeup;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -14,6 +16,7 @@ import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.loopj.android.http.RequestParams;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -33,6 +36,11 @@ public class HitchMePage extends BaseBaseActivity {
     private GoogleApiClient client;
 
     private Context context;
+    private EditText start;
+    private EditText ziel;
+    public JSONArray hitchMatchings = new JSONArray();
+    private String userN = null;
+    AlertDialog.Builder builder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +52,8 @@ public class HitchMePage extends BaseBaseActivity {
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
         nvDrawer.getMenu().getItem(2).setChecked(true);
         context = this.getApplicationContext();
+        start = (EditText) findViewById(R.id.StartEdit);
+        ziel = (EditText) findViewById(R.id.ZielEdit);
     }
 
     @Override
@@ -74,61 +84,106 @@ public class HitchMePage extends BaseBaseActivity {
     }
 
     public void onClick(final View v) {
-        switch (v.getId()) {
-            case  R.id.startHitch: {
-                final Intent startHitchIntent = new Intent(v.getContext(), MainPage.class);
-                //TODO: post HitchRequest via SocketIO/REST/or something else
+        RequestParams updateParams = new RequestParams();
+        updateParams.put("from", start.getText().toString());
+        updateParams.put("to", ziel.getText().toString());
 
-                EditText start = (EditText) findViewById(R.id.StartEdit);
-                EditText ziel = (EditText) findViewById(R.id.ZielEdit);
-                RequestParams params = new RequestParams();
-                params.put("from", start.getText().toString());
-                params.put("to", ziel.getText().toString());
+   //     Log.d(TAG, "from:" + fromET.getText().toString());
+   //     Log.d(TAG, "to:" + toET.getText().toString());
 
-                //Add info to newsFeed
-                BaseApplication app = (BaseApplication)getApplication();
-                app.addToNewsList("Request to pick you up for a ride to " + ziel.getText().toString() + " has been posted");
 
-                AsyncClient.post("/api/hitchRequest", params, new mJsonHttpResponseHandler(this) {
-                    @Override
-                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                        try {
-                            if (response.getInt(context.getString(R.string.server_response)) == 1) {
+        AsyncClient.post("api/hitchRequest", updateParams, new mJsonHttpResponseHandler(context) {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, final JSONArray response) {
 
-                                Toast.makeText(context, response.getString(context.getString(R.string.server_message)), Toast.LENGTH_SHORT).show();
-                                //   Intent i = new Intent(context, BaseActivity.class);
+          //      Log.d(TAG, response.toString());
 
-                                startActivity(startHitchIntent);
-                                finish();
-                            } else if (response.getInt(context.getString(R.string.server_response)) == 0) {
-                                System.out.println("Request failed!");
+                if (response != null) {
 
-                                Toast.makeText(context, response.getString(context.getString(R.string.server_message)), Toast.LENGTH_SHORT).show();
-                                v.setEnabled(true);
+                    Toast.makeText(context, "Request created", Toast.LENGTH_SHORT).show();
+                //    Toast.makeText(context, response.toString(), Toast.LENGTH_SHORT).show();
+                    hitchMatchings =response;
+
+
+                    HitchMePage.this.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                final JSONObject js= response.getJSONObject(0);
+                                buildMatchAlert(js).show();
+                            } catch (JSONException e) {
+                                e.printStackTrace();
                             }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+
                         }
-                    }
-                });
+                    });
 
 
-                Toast t =   Toast.makeText(this,"HitchRequest has been sent", Toast.LENGTH_LONG);
-                t.show();
-                //              TextView start = (TextView) v.findViewById(R.id.StartEdit);
-                //            TextView ziel = (TextView) v.findViewById(R.id.ZielEdit);
+                } else  {
+                    Toast.makeText(context, "An Error has occured while trying to create the request", Toast.LENGTH_SHORT).show();
+                }
 
-                startActivity(startHitchIntent);
-                break;
             }
-            default:
-                Log.d("DEBUG","no Button found with this id");
-                break;
-            //.... etc
-        }
+        });
+
     }
 
 
+    private AlertDialog buildMatchAlert(final JSONObject curPotential){
+        builder = new AlertDialog.Builder(HitchMePage.this);
+        //wenn Match gefunden
+        final String username;
+        String uName;
+        if(curPotential!=null) {
+            try {
+                String userID = curPotential.getString("user");
 
+
+            AsyncClient.get(("api/user/"+ userID), null, new mJsonHttpResponseHandler(context) {
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, final JSONObject response) {
+                    try {
+                        userN = response.getString("firstname");
+                        Toast.makeText(context, userN, Toast.LENGTH_SHORT).show();
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }});
+
+
+            builder.setMessage("Do you want a drive with "+userN)
+                    .setTitle("Match!");
+            builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    //Nachricht an Server, dass akzeptiert wurde
+
+                }
+            });
+            builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    //Nachricht an Server, dass abgelehnt wurde
+
+                }
+            });
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        } else {
+            builder.setMessage("Zurzeit liegt kein passendes Match vor. Du wirst benachrichtigt, wenn sich das ändert.")
+                    .setTitle("Kein Match!");
+            builder.setPositiveButton("Ja", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+
+                }
+            });
+        }
+        AlertDialog dialog = builder.create();
+        return dialog;
+    }
 
 }
+
+
+
+
