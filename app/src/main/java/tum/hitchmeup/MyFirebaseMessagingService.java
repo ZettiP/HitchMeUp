@@ -9,12 +9,17 @@ import android.util.Log;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
+import tum.Models.BaseApplication;
+
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     private static final String TAG = "MyFirebaseMsgService";
 
+    BaseApplication app;
+
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
+        app = (BaseApplication) getApplication();
         Log.d(TAG, "From: " + remoteMessage.getFrom());
 
         // Check if message contains a data payload.
@@ -26,6 +31,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         if (remoteMessage.getNotification() != null) {
             Log.d(TAG, "Message Notification Body: " + remoteMessage.getNotification().getBody());
         }
+
+        app.addToNewsList("Message received from Server: " + remoteMessage.getNotification().getBody());
 
     }
 

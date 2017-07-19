@@ -168,6 +168,36 @@ public class NaviPage extends BaseBaseActivity implements OnMapReadyCallback {
 
         BaseApplication app = (BaseApplication)getApplication();
         app.addToNewsList("Navigation to " + ziel.getText().toString() + " has been started");
+
+        final Context context = getApplicationContext();
+
+       /* RequestParams params = new RequestParams();
+        params.put("from", start.getText().toString());
+        params.put("to", ziel.getText().toString());
+
+        AsyncClient.post("/api/naviRequest", params, new mJsonHttpResponseHandler(this) {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                try {
+                    if (response.getInt(context.getString(R.string.server_response)) == 1) {
+
+                        Toast.makeText(context, response.getString(context.getString(R.string.server_message)), Toast.LENGTH_SHORT).show();
+                        //   Intent i = new Intent(context, BaseActivity.class);
+
+                        Log.d("FINALLY","hitchrequest sent and response received");
+                        //startActivity(startHitchIntent);
+                        finish();
+                    } else if (response.getInt(context.getString(R.string.server_response)) == 0) {
+                        System.out.println("Request failed!");
+
+                        Toast.makeText(context, response.getString(context.getString(R.string.server_message)), Toast.LENGTH_SHORT).show();
+                        //v.setEnabled(true);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });*/
     }
 
     public static void hideSoftKeyboard(Activity activity) {
