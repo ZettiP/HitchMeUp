@@ -104,19 +104,34 @@ public class HitchMePage extends BaseBaseActivity {
                 //    Toast.makeText(context, response.toString(), Toast.LENGTH_SHORT).show();
                     hitchMatchings =response;
 
+                    String userID = null;
+                    try {
+                        userID = response.getJSONObject(0).getString("user");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
 
-                    HitchMePage.this.runOnUiThread(new Runnable() {
+                    AsyncClient.get(("api/user/"+ userID), null, new mJsonHttpResponseHandler(context) {
                         @Override
-                        public void run() {
+                        public void onSuccess(int statusCode, Header[] headers, final JSONObject response) {
                             try {
-                                final JSONObject js= response.getJSONObject(0);
-                                buildMatchAlert(js).show();
+                                userN = response.getString("firstname");
+                                //  Toast.makeText(context, userN, Toast.LENGTH_SHORT).show();
+
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
 
-                        }
-                    });
+                            HitchMePage.this.runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    buildMatchAlert().show();
+                                }
+                            });
+
+
+
+                        }});
 
 
                 } else  {
@@ -129,46 +144,27 @@ public class HitchMePage extends BaseBaseActivity {
     }
 
 
-    private AlertDialog buildMatchAlert(final JSONObject curPotential){
+    private AlertDialog buildMatchAlert(){
         builder = new AlertDialog.Builder(HitchMePage.this);
         //wenn Match gefunden
         final String username;
         String uName;
-        if(curPotential!=null) {
-            try {
-                String userID = curPotential.getString("user");
+        if(userN!=null) {
+                        builder.setMessage("Do you want a drive with " + userN)
+                                .setTitle("Match!");
+                        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                //Nachricht an Server, dass akzeptiert wurde
 
+                            }
+                        });
+                        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                //Nachricht an Server, dass abgelehnt wurde
 
-            AsyncClient.get(("api/user/"+ userID), null, new mJsonHttpResponseHandler(context) {
-                @Override
-                public void onSuccess(int statusCode, Header[] headers, final JSONObject response) {
-                    try {
-                        userN = response.getString("firstname");
-                        Toast.makeText(context, userN, Toast.LENGTH_SHORT).show();
+                            }
+                        });
 
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }});
-
-
-            builder.setMessage("Do you want a drive with "+userN)
-                    .setTitle("Match!");
-            builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int id) {
-                    //Nachricht an Server, dass akzeptiert wurde
-
-                }
-            });
-            builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int id) {
-                    //Nachricht an Server, dass abgelehnt wurde
-
-                }
-            });
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
         } else {
             builder.setMessage("Zurzeit liegt kein passendes Match vor. Du wirst benachrichtigt, wenn sich das ändert.")
                     .setTitle("Kein Match!");
@@ -181,6 +177,9 @@ public class HitchMePage extends BaseBaseActivity {
         AlertDialog dialog = builder.create();
         return dialog;
     }
+
+
+
 
 }
 

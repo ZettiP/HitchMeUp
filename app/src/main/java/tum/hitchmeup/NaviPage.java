@@ -127,7 +127,7 @@ public class NaviPage extends BaseBaseActivity implements OnMapReadyCallback {
                 //     Log.d(TAG, "to:" + toET.getText().toString());
 
 
-                AsyncClient.post("api/naviRequest", updateParams, new mJsonHttpResponseHandler(context) {
+                AsyncClient.post("api/hitchRequest", updateParams, new mJsonHttpResponseHandler(context) {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
 
